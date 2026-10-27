@@ -1,0 +1,429 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Tenor Sans с добавленными кыргызскими буквами Ң Ү Ө (в оригинальном шрифте их нет) */
+@font-face {
+  font-family: 'Tenor Sans';
+  src:
+    url('/fonts/TenorSans-Regular.woff2?v=3-kg') format('woff2'),
+    url('/fonts/TenorSans-Regular.ttf?v=3-kg') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*
+ * Две темы на одной разметке. Тёмная включается классом .dark на <html> (shared/lib/theme.ts)
+ * и выбрана по умолчанию. Имена токенов объявлены в tailwind.config.ts.
+ */
+@layer base {
+  :root {
+    --background: 220 20% 93%; /* прохладный сине-серый фон (#e6e9ee) */
+    --foreground: 228 9% 18%; /* графит #2b2d33 */
+
+    --card: 220 20% 97%; /* поверхность карточки #f6f7f9 */
+    --card-foreground: 228 9% 18%;
+
+    --popover: 220 20% 97%;
+
+    --primary: 228 9% 18%; /* графит #2b2d33 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 20% 94%; /* второй тон карточки #eef0f3 */
+    --secondary-foreground: 228 9% 18%;
+
+    --muted: 220 20% 94%;
+    --muted-foreground: 224 6% 58%; /* #8b909b */
+
+    --accent: 220 20% 94%;
+    --accent-foreground: 228 9% 18%;
+
+    --destructive: 9 44% 53%; /* #c0604f */
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 16% 90%; /* #e2e5ea */
+    --input: 220 16% 90%;
+    --ring: 219 17% 57%; /* слейт #7f8ca4 */
+
+    --radius: 1rem;
+
+    --glass: rgb(255 255 255 / 0.42);
+    --glass-strong: rgb(255 255 255 / 0.72);
+    --glass-line: rgb(255 255 255 / 0.85);
+    --glass-edge: rgb(255 255 255 / 1);
+    --glass-panel: rgb(255 255 255 / 0.94);
+    --glass-quiet: rgb(255 255 255 / 0.3);
+    --glass-line-quiet: rgb(255 255 255 / 0.55);
+    --glass-hover: rgb(255 255 255 / 0.7);
+    --glass-field: rgb(255 255 255 / 0.66);
+
+    --surface-from: rgb(255 255 255 / 0.62);
+    --surface-to: rgb(255 255 255 / 0.42);
+    --surface-accent-from: rgb(51 53 60); /* графит и графит-deep */
+    --surface-accent-to: rgb(38 40 46);
+    --sheet-from: rgb(255 255 255 / 0.4);
+    --sheet-to: rgb(255 255 255 / 0.26);
+    --sheet-line: rgb(255 255 255 / 0.8);
+    /* главное действие: графитовый металл */
+    --cta-from: rgb(78 82 92);
+    --cta-mid: rgb(58 61 68);
+    --cta-to: rgb(43 45 51);
+    --cta-ink: rgb(244 245 247);
+    --cta-edge: rgb(255 255 255 / 0.18);
+    --nav-active: 58 61 68; /* графит, стопы как у кнопки */
+    --nav-active-light: 78 82 92;
+    --nav-active-dark: 43 45 51;
+    --nav-active-ink: 255 255 255;
+
+    --shadow-soft:
+      inset 0 1px 0 rgb(255 255 255 / 0.75), 0 10px 30px rgb(70 80 100 / 0.1), 0 2px 6px rgb(70 80 100 / 0.06);
+    --shadow-soft-sm: inset 0 1px 0 rgb(255 255 255 / 0.6), 0 4px 14px rgb(70 80 100 / 0.08);
+    --shadow-sheet: var(--shadow-soft);
+  }
+
+  .dark {
+    color-scheme: dark;
+    --background: 212 61% 8%;
+    --foreground: 216 63% 97%;
+    --card: 211 52% 16%;
+    --card-foreground: 216 63% 97%;
+    --popover: 212 56% 11%;
+    /* приглушённый синий: навигация, выделение, фокус */
+    --primary: 214 32% 52%;
+    --primary-foreground: 216 63% 97%;
+    --secondary: 212 48% 19%;
+    --secondary-foreground: 216 63% 97%;
+    --muted: 212 38% 22%;
+    --muted-foreground: 213 32% 77%;
+    --accent: 213 48% 25%;
+    --accent-foreground: 216 63% 97%;
+    --destructive: 351 74% 74%;
+    --destructive-foreground: 212 61% 8%;
+    --border: 211 30% 32%;
+    --input: 211 30% 32%;
+    --ring: 214 40% 62%;
+
+    /* brand-*, tint-*, nav-*: rgb-триплеты без rgb(), иначе не работает модификатор /alpha.
+       brand-green: акцент, днём графит, ночью шампань */
+    --brand-green: 205 172 112;
+    --brand-green-dark: 176 140 84;
+    --brand-cream: 242 246 252;
+    --brand-ink: 18 47 77;
+    --brand-slate: 130 180 235;
+    --brand-slate-soft: 159 194 235;
+    --brand-slate-deep: 102 149 203;
+    --brand-slate-mist: 179 202 230;
+    --brand-slate-pale: 179 202 230;
+    --brand-slate-fog: 188 205 226;
+    --brand-graphite-panel: 17 38 60;
+    --brand-graphite-ink: 8 20 33;
+    --brand-good: 118 214 160;
+    --brand-good-soft: 151 230 184;
+    --brand-good-bright: 118 214 160;
+    --brand-good-deep: 88 160 120;
+    --brand-warn: 233 189 91;
+    --brand-warn-soft: 241 205 127;
+    --brand-bad: 238 139 153;
+    --brand-bad-soft: 245 170 181;
+    --tint-bottle: 32 55 80;
+    --tint-bottle-deep: 23 41 62;
+    --tint-pack: 32 59 58;
+    --tint-pack-deep: 22 43 45;
+    --tint-pour: 66 55 42;
+    --tint-pour-deep: 44 39 34;
+
+    /* Тёмное стекло: плотность даёт backdrop-blur + saturate, а не непрозрачность;
+       слои складываются, поэтому каждый почти прозрачный */
+    --glass: rgb(150 190 240 / 0.12);
+    --glass-strong: rgb(16 34 56 / 0.42);
+    --glass-line: rgb(190 215 245 / 0.28);
+    --glass-edge: rgb(200 222 248 / 0.5);
+    --glass-panel: rgb(12 26 44 / 0.9);
+    --glass-quiet: rgb(190 215 245 / 0.05);
+    --glass-line-quiet: rgb(190 215 245 / 0.13);
+    --glass-hover: rgb(190 215 245 / 0.22);
+    --glass-field: rgb(8 22 38 / 0.38);
+
+    /* карточки плотнее листа: на них текст и цифры */
+    --surface-from: rgb(28 54 86 / 0.55);
+    --surface-to: rgb(14 32 54 / 0.55);
+    /* акцентные карты плотнее: много мелкого текста */
+    --surface-accent-from: rgb(16 34 56 / 0.86);
+    --surface-accent-to: rgb(7 18 32 / 0.86);
+    --sheet-from: rgb(140 180 230 / 0.12);
+    --sheet-to: rgb(25 50 80 / 0.18);
+    --sheet-line: rgb(190 215 245 / 0.28);
+    /* главное действие: стекло без заливки со светлой кромкой */
+    --cta-from: rgb(190 215 245 / 0.3);
+    --cta-mid: rgb(190 215 245 / 0.2);
+    --cta-to: rgb(190 215 245 / 0.14);
+    --cta-ink: rgb(242 246 252);
+    --cta-edge: rgb(215 232 252 / 0.85);
+    --nav-active: 56 128 236; /* синий металл: светлый, средний, глубокий */
+    --nav-active-light: 122 172 246;
+    --nav-active-dark: 32 88 186;
+    --nav-active-ink: 242 246 252;
+
+    --shadow-soft: inset 0 1px 0 rgb(220 235 255 / 0.28), 0 10px 30px rgb(0 8 20 / 0.3);
+    --shadow-soft-sm: inset 0 1px 0 rgb(220 235 255 / 0.24), 0 4px 14px rgb(0 8 20 / 0.2);
+    --shadow-sheet: var(--shadow-soft);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    font-feature-settings: 'ss01', 'liga';
+    font-variant-numeric: tabular-nums;
+    isolation: isolate;
+  }
+  body > #root {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Светлая тема: цветные пятна под стеклом панелей, слой фиксированный */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: -40px;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+      radial-gradient(46% 56% at 12% 16%, rgb(150 182 240 / 0.9), transparent 64%),
+      radial-gradient(40% 50% at 88% 10%, rgb(244 208 156 / 0.9), transparent 64%),
+      radial-gradient(50% 60% at 74% 90%, rgb(160 214 230 / 0.85), transparent 64%),
+      radial-gradient(36% 46% at 20% 94%, rgb(214 190 236 / 0.85), transparent 64%),
+      linear-gradient(150deg, #dde3ec, #f0f2f6 60%, #e6ebf2);
+    filter: blur(22px) saturate(1.2);
+  }
+
+  .dark body {
+    background: transparent;
+  }
+  .dark {
+    background: hsl(var(--background));
+  }
+  .dark body::before {
+    background-image:
+      radial-gradient(52% 15% at 84% 9%, rgb(214 172 104 / 0.3), transparent 66%),
+      radial-gradient(13% 42% at 93% 4%, rgb(236 202 138 / 0.26), transparent 66%),
+      radial-gradient(24% 20% at 74% 24%, rgb(176 132 74 / 0.22), transparent 62%),
+      radial-gradient(46% 13% at 12% 8%, rgb(206 164 98 / 0.26), transparent 66%),
+      radial-gradient(12% 38% at 5% 6%, rgb(232 198 134 / 0.21), transparent 66%),
+      radial-gradient(20% 18% at 24% 22%, rgb(170 128 72 / 0.18), transparent 62%),
+      radial-gradient(48% 14% at 86% 92%, rgb(210 168 102 / 0.27), transparent 66%),
+      radial-gradient(12% 40% at 95% 96%, rgb(234 200 136 / 0.22), transparent 66%),
+      radial-gradient(22% 20% at 74% 78%, rgb(172 130 74 / 0.2), transparent 62%),
+      radial-gradient(44% 13% at 12% 93%, rgb(204 162 96 / 0.22), transparent 66%),
+      radial-gradient(11% 36% at 4% 95%, rgb(230 196 132 / 0.2), transparent 66%),
+      radial-gradient(20% 18% at 24% 78%, rgb(168 126 70 / 0.17), transparent 62%),
+      radial-gradient(60% 30% at 50% 50%, rgb(20 44 76 / 0.5), transparent 70%),
+      linear-gradient(150deg, #06111f, #0c2238 52%, #040c17);
+    filter: blur(14px) saturate(1.15);
+  }
+  @supports not (backdrop-filter: blur(1px)) {
+    :root {
+      --glass: rgb(255 255 255 / 0.92);
+      --glass-strong: rgb(255 255 255);
+      --surface-from: rgb(255 255 255);
+      --surface-to: rgb(244 246 250);
+    }
+    .dark {
+      --glass: rgb(19 39 61);
+      --glass-strong: rgb(12 27 43);
+      --surface-from: rgb(19 39 61);
+      --surface-to: rgb(14 31 50);
+    }
+  }
+
+  ::selection {
+    @apply bg-primary text-primary-foreground;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-medium tracking-tight;
+  }
+
+  :where(button, a, input, select, textarea):focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+  }
+  :where(button, input, select, textarea):disabled {
+    cursor: not-allowed;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Подпись прописными гарнитурой логотипа: навигация, надзаголовки */
+  .brand-eyebrow {
+    @apply font-brand text-xs uppercase tracking-brand text-muted-foreground;
+  }
+
+  /* Единый стиль полей: инпуты, селекты, фильтры */
+  .field {
+    @apply h-9 rounded-full border border-border px-4 text-sm text-foreground transition-all duration-200 placeholder:text-muted-foreground/70;
+    background-color: var(--glass-field);
+    box-shadow: 0 1px 2px rgb(40 40 43 / 0.04);
+  }
+  .field:hover {
+    @apply border-foreground/30;
+  }
+  .field:focus,
+  .field:focus-visible {
+    @apply border-ring/70 outline-none;
+    box-shadow:
+      0 0 0 4px hsl(var(--ring) / 0.18),
+      0 1px 2px rgb(70 80 100 / 0.06);
+  }
+  .dark .field {
+    border-color: var(--glass-line);
+  }
+  .dark .field:hover {
+    border-color: var(--glass-hover);
+  }
+  /* Нативная стрелка селекта скрыта, шеврон рисуем сами; цвет в data-URI не берётся
+     из переменной, поэтому по варианту на тему */
+  select.field {
+    @apply cursor-pointer appearance-none bg-no-repeat pr-9;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2367676C' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-position: right 0.8rem center;
+    background-size: 14px;
+  }
+  .dark select.field {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23b3c4d8' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  }
+  .dark option {
+    background: hsl(var(--popover));
+    color: hsl(var(--foreground));
+  }
+  .dark input:-webkit-autofill {
+    -webkit-text-fill-color: hsl(var(--foreground));
+    box-shadow: 0 0 0 1000px hsl(var(--popover)) inset;
+  }
+
+  /* Чекбоксы и радио в цвете акцента вместо системного синего */
+  input[type='checkbox'],
+  input[type='radio'] {
+    accent-color: hsl(var(--ring));
+  }
+
+  /* Монограмма на входе: PNG как маска, цвет из темы */
+  .login-monogram {
+    aspect-ratio: 344 / 400;
+    /* запасное значение: днём --brand-* заданы только в tailwind.config.ts */
+    background: rgb(var(--brand-ink, 43 45 51));
+    -webkit-mask: url('/brand/monogram-dark.png') center / contain no-repeat;
+    mask: url('/brand/monogram-dark.png') center / contain no-repeat;
+  }
+  /* Ночью блик пробегает по background-position */
+  .dark .login-monogram {
+    background-image:
+      linear-gradient(105deg, transparent 42%, rgb(255 250 235 / 0.75) 50%, transparent 58%),
+      linear-gradient(160deg, rgb(232 211 166), rgb(var(--brand-green)) 55%, rgb(var(--brand-green-dark)));
+    background-size:
+      260% 100%,
+      100% 100%;
+    background-position:
+      220% 0,
+      0 0;
+    animation: monogram-shine 7s ease-in-out infinite;
+  }
+  @keyframes monogram-shine {
+    0%,
+    55% {
+      background-position:
+        220% 0,
+        0 0;
+    }
+    100% {
+      background-position:
+        -120% 0,
+        0 0;
+    }
+  }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+/* Адаптивные таблицы: на телефоне (<768px) строки становятся карточками.
+   Класс rtable на <table>, подпись ячейки в data-label на <td>. */
+@media (max-width: 767px) {
+  table.rtable,
+  table.rtable tbody,
+  table.rtable tfoot,
+  table.rtable tr,
+  table.rtable td {
+    display: block;
+    width: auto;
+  }
+  table.rtable thead {
+    display: none;
+  }
+  table.rtable tr {
+    border: 1px solid hsl(var(--border));
+    border-radius: 12px;
+    padding: 0.25rem 0.25rem;
+    margin-bottom: 0.625rem;
+  }
+  table.rtable td {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.4rem 0.85rem !important;
+    text-align: right;
+  }
+  table.rtable td::before {
+    content: attr(data-label);
+    color: hsl(var(--muted-foreground));
+    font-size: 0.6875rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    text-align: left;
+    white-space: nowrap;
+  }
+  table.rtable td:first-child {
+    justify-content: flex-start;
+    padding-top: 0.6rem !important;
+    font-weight: 500;
+  }
+  table.rtable td:first-child::before {
+    display: none;
+  }
+  table.rtable td:empty {
+    display: none;
+  }
+}
